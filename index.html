@@ -252,7 +252,12 @@
               info.update = function (props) {
                 if(props){
                   // console.log(props);
-                  this._div.innerHTML = '<h4>Confirmed cases</h4><b>' + props["NAME_1"] + ": "+statewise[props["NAME_1"]][1]+"</b>";
+                  // this._div.innerHTML = '<h4>Confirmed cases</h4><b>' + props["NAME_1"] + ": "+statewise[props["NAME_1"]][1]+"</b>";
+                  this._div.innerHTML = '<h4>'+props["NAME_1"]+'</h4>'+
+                  '<pre>Confirmed: '+statewise[props["NAME_1"]][1]+
+                  '<br>Recovered: '+statewise[props["NAME_1"]][2]+
+                  '<br>Deaths   : '+statewise[props["NAME_1"]][3]+
+                  '<br>Active   : '+statewise[props["NAME_1"]][4]+"</pre>";
                 }
 
               };
