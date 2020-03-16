@@ -226,17 +226,14 @@
 
             function initMapStuff(){
 
-              var map = L.map('map').setView([22.5, 82], 5);
+              var map = L.map('map').setView([22.5, 82], 3);
               map.setMaxBounds(map.getBounds());
-              map.dragging.disable();
+              // map.dragging.disable();
               map.setView([22.5, 82], 4);
               
               L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1Ijoic3VkZXZzY2hpeiIsImEiOiJjazdvbGg1ZWMwOW52M21wOWEzZzFmcWhnIn0.hN6tcoQ3uo-ha-hmki5Qew', {
                 maxZoom: 6,
                 minZoom: 4,
-                // attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
-                // '<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
-                // 'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
                 id: 'mapbox/light-v9',
                 tileSize: 512,
                 zoomOffset: -1
@@ -255,7 +252,7 @@
               info.update = function (props) {
                 if(props){
                   // console.log(props);
-                  this._div.innerHTML = '<h4>Confirmed cases</h4>' + props["NAME_1"] + ": "+statewise[props["NAME_1"]][1];
+                  this._div.innerHTML = '<h4>Confirmed cases</h4><b>' + props["NAME_1"] + ": "+statewise[props["NAME_1"]][1]+"</b>";
                 }
 
               };
@@ -272,11 +269,11 @@
                 }
 
                 return {
-                  weight: 0,
+                  weight: 1,
                   opacity: 1,
-                  color: 'white',
-                  dashArray: '3',
-                  fillOpacity: n/maxConfirmed,
+                  color: "#bfbfbf",
+                  // dashArray: '3',
+                  fillOpacity: (n/maxConfirmed)*0.8,
                   // fillColor: "#000000"
                   fillColor: "red"
                 };
