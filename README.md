@@ -10,6 +10,7 @@ move the html from dist to docs after the above command. (# Need a better effici
 # to run
 
 `git clone https://github.com/BetaTurtle/covid19india.git`
+
 `python -m http.server`
 
 Open http://localhost:8000 in browser to test
