@@ -3,39 +3,39 @@ var statewise = {};
 var maxConfirmed = 0;
 var lastUpdated = "";
 
-var newjson = [];
+var confirmed_delta = 0;
+var deaths_delta = 0;
+var recovered_delta = 0;
+var states_delta = 0;
 
-$.getJSON("https://spreadsheets.google.com/feeds/cells/1nzXUdaIWC84QipdVGUKTiCSc5xntBbpMpzLm6Si33zk/ovd0hzm/public/values?alt=json",
+
+// make sure to use Prod before submitting
+
+// var sheet_id = "ob1elpb"; // Test
+var sheet_id = "ovd0hzm"; // Prod
+
+$.getJSON("https://spreadsheets.google.com/feeds/cells/1nzXUdaIWC84QipdVGUKTiCSc5xntBbpMpzLm6Si33zk/"+sheet_id+"/public/values?alt=json",
 function(result) {
     entries = result["feed"]["entry"]
     entries.forEach(function(item) {
-        if (newjson[(item["gs$cell"]["row"] - 1)] == null) {
-            newjson[(item["gs$cell"]["row"] - 1)] = [];
+        if (alldata[(item["gs$cell"]["row"] - 1)] == null) {
             alldata[(item["gs$cell"]["row"] - 1)] = [];
-        }
-        if (parseInt(item["gs$cell"]["col"]) - 1 < 2) 
-        {
-            if (!isNaN(item["gs$cell"]["$t"])) {
-                newjson[(item["gs$cell"]["row"] - 1)][(item["gs$cell"]["col"] - 1)] = parseInt(item["gs$cell"]["$t"]);
-            } else {
-                newjson[(item["gs$cell"]["row"] - 1)][(item["gs$cell"]["col"] - 1)] = (item["gs$cell"]["$t"]);
-            }
         }
         alldata[(item["gs$cell"]["row"] - 1)][(item["gs$cell"]["col"] - 1)] = (item["gs$cell"]["$t"]);
     });
-    // alldata = newjson;
-    newjson.splice(1, 1);
     maxConfirmed = alldata[2][1];
     lastUpdated = alldata[1][5];
+    confirmed_delta = alldata[1][6];
+    deaths_delta = alldata[1][7];
+    recovered_delta = alldata[1][8];
+    states_delta = alldata[1][9];
     
     for(var i = 0; i<alldata.length;i++){
-        alldata[i].splice(5,1);
+        alldata[i].splice(5); // Keep only 5 columns. State, Confirmed, Recovered, Deaths, Active
     }
     alldata.forEach(function(data){
         statewise[data[0]] = data;
     });
-    // console.log(newjson);
-    // console.log(alldata);
     var numStatesInfected = 0;
     
     var tablehtml = "<thead>";
@@ -86,6 +86,12 @@ function(result) {
     $("div#deathsvalue").html(alldata[1][3]);
     $("div#recoveredvalue").html(alldata[1][2]);
     $("strong#last-updated").html(lastUpdated);
+
+    if(confirmed_delta)$("div#confirmed_delta").html("( +"+confirmed_delta+")");
+    if(deaths_delta) $("div#deaths_delta").html("( +"+deaths_delta+")");
+    if(recovered_delta)$("div#recovered_delta").html("( +"+recovered_delta+")");
+    if(states_delta)$("div#states_delta").html("( +"+states_delta+")");
+
     
     initMapStuff();
     
