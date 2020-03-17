@@ -1,8 +1,9 @@
 # covid19india
 
+View our [live patient database].  If you'd like to collaborate, join the [Telegram Group].
 
-
-
+[live patient database]: https://docs.google.com/spreadsheets/d/1nzXUdaIWC84QipdVGUKTiCSc5xntBbpMpzLm6Si33zk
+[Telegram Group]: https://t.me/covid19indiaops
 
 # to run
 
