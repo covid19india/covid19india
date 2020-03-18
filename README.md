@@ -9,7 +9,9 @@ View our [live patient database].  If you'd like to collaborate, join the [Teleg
 
 `git clone https://github.com/BetaTurtle/covid19india.git`
 
-`python -m http.server`
+Python3 : `python -m http.server`
+
+Python2 : `python -m SimpleHTTPServer`
 
 Open http://localhost:8000 in browser to test
 

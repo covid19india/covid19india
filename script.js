@@ -24,7 +24,7 @@ function(result) {
         alldata[(item["gs$cell"]["row"] - 1)][(item["gs$cell"]["col"] - 1)] = (item["gs$cell"]["$t"]);
     });
     maxConfirmed = alldata[2][1];
-    lastUpdated = alldata[1][5];
+    lastUpdated = getLocalTime(alldata[1][5]);
     confirmed_delta = alldata[1][6];
     deaths_delta = alldata[1][7];
     recovered_delta = alldata[1][8];
@@ -212,4 +212,15 @@ geojson = L.geoJson(statesData, {
     style: style,
     onEachFeature: onEachFeature
 }).addTo(map);
+}
+
+function getLocalTime(timestamp){
+    try {
+        // Assuming that the timestamp at hand is in IST, and is of the format
+        // "March 17, 2020 at 10:11 pm", though the linient parser can handle sane versions of dates
+        let localTime = new Date(timestamp.replace('at ','') + ' GMT+530');
+        return moment(+localTime).from();
+    } catch(e){
+        return timestamp;
+    }
 }
