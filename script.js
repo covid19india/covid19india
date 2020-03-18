@@ -29,7 +29,7 @@ function(result) {
     deaths_delta = alldata[1][7];
     recovered_delta = alldata[1][8];
     states_delta = alldata[1][9];
-    
+
     for(var i = 0; i<alldata.length;i++){
         alldata[i].splice(5); // Keep only 5 columns. State, Confirmed, Recovered, Deaths, Active
     }
@@ -37,7 +37,7 @@ function(result) {
         statewise[data[0]] = data;
     });
     var numStatesInfected = 0;
-    
+
     var tablehtml = "<thead>";
     for (var i = 0; i < alldata.length; i++) {
         if (i == 0) {
@@ -51,7 +51,7 @@ function(result) {
                 continue;
             }
             tempdata = Array.from(alldata[i]);
-            
+
             tempdata.splice(0, 1);
             allzero = true;
             tempdata.forEach(function(data) {
@@ -74,7 +74,7 @@ function(result) {
         tablehtml += "<td>" + data + "</td>";
     });
     tablehtml += "</tr>";
-    
+
     tablehtml += "</tbody>";
     alldata.forEach(function(item) {
         tablehtml += item[0];
@@ -92,30 +92,30 @@ function(result) {
     if(recovered_delta)$("div#recovered_delta").html("( +"+recovered_delta+")");
     if(states_delta)$("div#states_delta").html("( +"+states_delta+")");
 
-    
+
     initMapStuff();
-    
+
 });
 
-function is_touch_device() {  
-    try {  
-        document.createEvent("TouchEvent");  
-        return true;  
-    } catch (e) {  
-        return false;  
-    }  
+function is_touch_device() {
+    try {
+        document.createEvent("TouchEvent");
+        return true;
+    } catch (e) {
+        return false;
+    }
 }
 
 function initMapStuff(){
     var map = L.map('map').setView([22.5, 82], 3);
     map.setMaxBounds(map.getBounds());
     map.setView([22.5, 82], 4);
-    
+
     if(is_touch_device()){
         map.dragging.disable();
         map.tap.disable();
     }
-    
+
     L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1Ijoic3VkZXZzY2hpeiIsImEiOiJjazdvbGg1ZWMwOW52M21wOWEzZzFmcWhnIn0.hN6tcoQ3uo-ha-hmki5Qew', {
     maxZoom: 6,
     minZoom: 4,
@@ -144,7 +144,7 @@ info.update = function (props) {
         '<br>Deaths   : '+statewise[props["NAME_1"]][3]+
         '<br>Active   : '+statewise[props["NAME_1"]][4]+"</pre>";
     }
-    
+
 };
 
 info.addTo(map);
@@ -157,13 +157,13 @@ function style(feature) {
         // console.log(statewise[feature.properties["NAME_1"]][1]);
         n = statewise[feature.properties["NAME_1"]][1];
     }
-    
+
     return {
         weight: 1,
         opacity: 1,
         color: "#bfbfbf",
         // dashArray: '3',
-        fillOpacity: (n/maxConfirmed)*0.8,
+        fillOpacity: (n>0)*0.05 + (n/maxConfirmed)*0.9,
         // fillColor: "#000000"
         fillColor: "red"
     };
@@ -172,20 +172,20 @@ function style(feature) {
 function highlightFeature(e) {
     geojson.resetStyle();
     info.update();
-    
+
     var layer = e.target;
-    
+
     layer.setStyle({
         weight: 1,
         color: '#000000',
         dashArray: '',
         // fillOpacity: 0.7
     });
-    
+
     if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
         layer.bringToFront();
     }
-    
+
     info.update(layer.feature.properties);
 }
 
