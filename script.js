@@ -218,7 +218,8 @@ function getLocalTime(timestamp){
     try {
         // Assuming that the timestamp at hand is in IST, and is of the format
         // "March 17, 2020 at 10:11 pm", though the linient parser can handle sane versions of dates
-        return new Date(timestamp.replace('at ','') + ' GMT+530').toString();
+        let localTime = new Date(timestamp.replace('at ','') + ' GMT+530');
+        return moment(+localTime).from();
     } catch(e){
         return timestamp;
     }
