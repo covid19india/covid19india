@@ -1,4 +1,4 @@
-var alldata = [];
+var all_data = [];
 var statewise = {};
 var maxConfirmed = 0;
 var lastUpdated = "";
@@ -8,6 +8,11 @@ var deaths_delta = 0;
 var recovered_delta = 0;
 var states_delta = 0;
 
+var numStatesInfected = 0;
+var all_data;
+
+var sort_field = 0;
+var sort_order;
 
 // make sure to use Prod before submitting
 
@@ -16,75 +21,34 @@ var sheet_id = "ovd0hzm"; // Prod
 
 $.getJSON("https://spreadsheets.google.com/feeds/cells/1nzXUdaIWC84QipdVGUKTiCSc5xntBbpMpzLm6Si33zk/"+sheet_id+"/public/values?alt=json",
 function(result) {
+    // console.log(result)
     entries = result["feed"]["entry"]
     entries.forEach(function(item) {
-        if (alldata[(item["gs$cell"]["row"] - 1)] == null) {
-            alldata[(item["gs$cell"]["row"] - 1)] = [];
+        if (all_data[(item["gs$cell"]["row"] - 1)] == null) {
+            all_data[(item["gs$cell"]["row"] - 1)] = [];
         }
-        alldata[(item["gs$cell"]["row"] - 1)][(item["gs$cell"]["col"] - 1)] = (item["gs$cell"]["$t"]);
+        all_data[(item["gs$cell"]["row"] - 1)][(item["gs$cell"]["col"] - 1)] = (item["gs$cell"]["$t"]);
     });
-    maxConfirmed = alldata[2][1];
-    lastUpdated = getLocalTime(alldata[1][5]);
-    confirmed_delta = alldata[1][6];
-    deaths_delta = alldata[1][7];
-    recovered_delta = alldata[1][8];
-    states_delta = alldata[1][9];
-
-    for(var i = 0; i<alldata.length;i++){
-        alldata[i].splice(5); // Keep only 5 columns. State, Confirmed, Recovered, Deaths, Active
+    maxConfirmed = all_data[2][1];
+    lastUpdated = getLocalTime(all_data[1][5]);
+    confirmed_delta = all_data[1][6];
+    deaths_delta = all_data[1][7];
+    recovered_delta = all_data[1][8];
+    states_delta = all_data[1][9];
+    for(var i = 0; i<all_data.length;i++){
+        all_data[i].splice(5); // Keep only 5 columns. State, Confirmed, Recovered, Deaths, Active
     }
-    alldata.forEach(function(data){
+    all_data.forEach(function(data){
         statewise[data[0]] = data;
     });
-    var numStatesInfected = 0;
 
-    var tablehtml = "<thead>";
-    for (var i = 0; i < alldata.length; i++) {
-        if (i == 0) {
-            tablehtml += "<tr>";
-            alldata[i].forEach(function(data) {
-                tablehtml += "<th>" + data + "</th>";
-            });
-            tablehtml += "</tr></thead><tbody>";
-        } else {
-            if (i == 1) {
-                continue;
-            }
-            tempdata = Array.from(alldata[i]);
-
-            tempdata.splice(0, 1);
-            allzero = true;
-            tempdata.forEach(function(data) {
-                if (data != 0) {
-                    allzero = false;
-                }
-            });
-            if (!allzero) {
-                numStatesInfected++;
-                tablehtml += "<tr>";
-                alldata[i].forEach(function(data) {
-                    tablehtml += "<td>" + data + "</td>";
-                });
-                tablehtml += "</tr>";
-            }
-        }
-    }
-    tablehtml += '<tr class="totals">';
-    alldata[1].forEach(function(data) {
-        tablehtml += "<td>" + data + "</td>";
-    });
-    tablehtml += "</tr>";
-
-    tablehtml += "</tbody>";
-    alldata.forEach(function(item) {
-        tablehtml += item[0];
-    });
+    tablehtml = constructTable(all_data);
+    
     // console.log(numStatesInfected);
-    $("table#prefectures-table").html(tablehtml);
     $("div#states-value").html(numStatesInfected);
-    $("div#confvalue").html(alldata[1][1]);
-    $("div#deathsvalue").html(alldata[1][3]);
-    $("div#recoveredvalue").html(alldata[1][2]);
+    $("div#confvalue").html(all_data[1][1]);
+    $("div#deathsvalue").html(all_data[1][3]);
+    $("div#recoveredvalue").html(all_data[1][2]);
     $("strong#last-updated").html(lastUpdated);
 
     if(confirmed_delta)$("div#confirmed_delta").html("( +"+confirmed_delta+")");
@@ -223,4 +187,97 @@ function getLocalTime(timestamp){
     } catch(e){
         return timestamp;
     }
+}
+
+
+function constructTable(all_data) {
+    var tablehtml = "<thead>";
+    for (var i = 0; i < all_data.length; i++) {
+        if (i == 0) {
+            tablehtml += "<tr>";
+            all_data[i].forEach(function(data, i) {
+                tablehtml += "<th><a href='' col_id='" + i + "' onclick='sort(this,event)'>" + data + "</a></th>";
+            });
+            tablehtml += "</tr></thead><tbody>";
+        } else {
+            if (i == 1) {
+                continue;
+            }
+            tempdata = Array.from(all_data[i]);
+
+            tempdata.splice(0, 1);
+            allzero = true;
+            tempdata.forEach(function(data) {
+                if (data != 0) {
+                    allzero = false;
+                }
+            });
+            if (!allzero) {
+                numStatesInfected++;
+                tablehtml += "<tr>";
+                all_data[i].forEach(function(data) {
+                    tablehtml += "<td>" + data + "</td>";
+                });
+                tablehtml += "</tr>";
+            }
+        }
+    }
+    tablehtml += '<tr class="totals">';
+    all_data[1].forEach(function(data) {
+        tablehtml += "<td>" + data + "</td>";
+    });
+    tablehtml += "</tr>";
+
+    tablehtml += "</tbody>";
+    all_data.forEach(function(item) {
+        tablehtml += item[0];
+    });
+    $("table#prefectures-table").html(tablehtml);
+    return tablehtml;
+}
+
+
+function sort(column, event) {
+    event.stopPropagation();
+    event.preventDefault();
+
+    const col_id = $(column).attr("col_id");
+
+    var total_ele = all_data.splice(0, 2);
+    
+    sort_order = col_id == sort_field? sort_order : undefined;
+
+    if(!sort_order) {
+        sort_order = col_id == 0? "A" : "D"
+    }
+
+    all_data.sort((a, b) => {
+        if(a == "Total") {
+            return -1;
+        }
+
+        if(b == "Total") {
+            return 0;
+        }
+
+        if(col_id != 0) {
+            a[col_id] = parseInt(a[col_id]);
+            b[col_id] = parseInt(b[col_id]);
+        }
+
+        if(sort_order == "D"){
+            return a[col_id] > b[col_id]? -1 : 1;
+        } else {
+            return a[col_id] > b[col_id]? 1 : -1;
+        }
+    })
+
+    all_data.unshift(total_ele[1]);
+    all_data.unshift(total_ele[0]);
+
+    sort_field = col_id;
+
+    sort_order = sort_order == "A"? "D" : "A";
+
+    constructTable(all_data);
 }
