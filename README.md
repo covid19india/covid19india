@@ -17,13 +17,13 @@ Open http://localhost:8000 in browser to test
 
 
 
-# to deploy 
+# to deploy
 
 minify and add to docs directory
 
-Install minify 
+Install minify
 `npm i minify -g`
 
-`minify script.js > docs/`
+`minify script.js > docs/script.js`
 
-`minify index.html > docs/`
+`minify index.html > docs/index.html`
