@@ -2,12 +2,12 @@
 	"statewise": [
 		{
 			"state": "Total",
-			"confirmed": "254",
+			"confirmed": "256",
 			"recovered": "23",
 			"deaths": "4",
-			"active": "227",
+			"active": "229",
 			"lastupdatedtime": "March 20, 2020 at 8:30 pm",
-			"confirmeddeltayesterday": "55",
+			"confirmeddeltayesterday": "57",
 			"deceaseddelta": "0",
 			"recovereddelta": "3",
 			"statesdelta": "0"
@@ -86,10 +86,10 @@
 		},
 		{
 			"state": "Telangana",
-			"confirmed": "17",
+			"confirmed": "19",
 			"recovered": "1",
 			"deaths": "0",
-			"active": "16",
+			"active": "18",
 			"lastupdatedtime": "",
 			"confirmeddeltayesterday": "",
 			"deceaseddelta": "",
@@ -146,6 +146,18 @@
 		},
 		{
 			"state": "Jammu and Kashmir",
+			"confirmed": "4",
+			"recovered": "0",
+			"deaths": "0",
+			"active": "4",
+			"lastupdatedtime": "",
+			"confirmeddeltayesterday": "",
+			"deceaseddelta": "",
+			"recovereddelta": "",
+			"statesdelta": ""
+		},
+		{
+			"state": "Madhya Pradesh",
 			"confirmed": "4",
 			"recovered": "0",
 			"deaths": "0",
@@ -229,6 +241,18 @@
 			"statesdelta": ""
 		},
 		{
+			"state": "Himachal Pradesh",
+			"confirmed": "2",
+			"recovered": "0",
+			"deaths": "0",
+			"active": "2",
+			"lastupdatedtime": "",
+			"confirmeddeltayesterday": "",
+			"deceaseddelta": "",
+			"recovereddelta": "",
+			"statesdelta": ""
+		},
+		{
 			"state": "Puducherry",
 			"confirmed": "1",
 			"recovered": "0",
@@ -301,18 +325,6 @@
 			"statesdelta": ""
 		},
 		{
-			"state": "Madhya Pradesh",
-			"confirmed": "4",
-			"recovered": "0",
-			"deaths": "0",
-			"active": "4",
-			"lastupdatedtime": "",
-			"confirmeddeltayesterday": "",
-			"deceaseddelta": "",
-			"recovereddelta": "",
-			"statesdelta": ""
-		},
-		{
 			"state": "Tripura",
 			"confirmed": "0",
 			"recovered": "0",
@@ -342,18 +354,6 @@
 			"recovered": "0",
 			"deaths": "0",
 			"active": "0",
-			"lastupdatedtime": "",
-			"confirmeddeltayesterday": "",
-			"deceaseddelta": "",
-			"recovereddelta": "",
-			"statesdelta": ""
-		},
-		{
-			"state": "Himachal Pradesh",
-			"confirmed": "2",
-			"recovered": "0",
-			"deaths": "0",
-			"active": "2",
 			"lastupdatedtime": "",
 			"confirmeddeltayesterday": "",
 			"deceaseddelta": "",
@@ -466,7 +466,7 @@
 			"totalrecovered": "0",
 			"dailydeceased": "0",
 			"totaldeceased": "0",
-			"confirmeddeltayesterday": "55",
+			"confirmeddeltayesterday": "57",
 			"recovereddelta": "3",
 			"deceaseddelta": "0"
 		},
@@ -1074,7 +1074,7 @@
 	"key_valyes": [
 		{
 			"lastupdatedtime": "March 20, 2020 at 8:30 pm",
-			"confirmeddelta": "55",
+			"confirmeddelta": "57",
 			"recovereddelta": "3",
 			"deceaseddelta": "0"
 		}
