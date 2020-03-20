@@ -1,0 +1,27 @@
+name: Sheet to Json Workflow
+
+on:
+  schedule:
+    # every 5 minutes the job will run
+    - cron:  '*/5 * * * *'
+
+jobs:
+  update-json-data:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v1
+      - name: Use Node.js 12.x
+        uses: actions/setup-node@v1
+        with:
+          node-version: "12.x"
+      - name: push
+        run: |
+           bash ./pushthejson
+           echo "the job completed"
+        env:
+            GITHUB_TOKEN: ${{ secrets.github_token }}
+
+
+#trigger the action
+#trigger the action by remove this line
