@@ -3,21 +3,21 @@
 		{
 			"state": "Total",
 			"confirmed": "219",
-			"recovered": "20",
+			"recovered": "25",
 			"deaths": "5",
-			"active": "194",
+			"active": "189",
 			"lastupdatedtime": "March 20, 2020 at 1:00 pm",
 			"confirmeddeltayesterday": "20",
 			"deceaseddelta": "1",
-			"recovereddelta": "0",
+			"recovereddelta": "5",
 			"statesdelta": "0"
 		},
 		{
 			"state": "Maharashtra",
 			"confirmed": "52",
-			"recovered": "0",
+			"recovered": "5",
 			"deaths": "1",
-			"active": "51",
+			"active": "46",
 			"lastupdatedtime": "",
 			"confirmeddeltayesterday": "",
 			"deceaseddelta": "",
@@ -467,7 +467,7 @@
 			"dailydeceased": "0",
 			"totaldeceased": "0",
 			"confirmeddeltayesterday": "20",
-			"recovereddelta": "0",
+			"recovereddelta": "5",
 			"deceaseddelta": "1"
 		},
 		{
