@@ -97,11 +97,11 @@
 			"statesdelta": ""
 		},
 		{
-			"state": "Ladakh",
-			"confirmed": "10",
-			"recovered": "0",
-			"deaths": "0",
-			"active": "10",
+			"state": "Rajasthan",
+			"confirmed": "12",
+			"recovered": "3",
+			"deaths": "1",
+			"active": "8",
 			"lastupdatedtime": "",
 			"confirmeddeltayesterday": "",
 			"deceaseddelta": "",
@@ -109,11 +109,11 @@
 			"statesdelta": ""
 		},
 		{
-			"state": "Rajasthan",
-			"confirmed": "12",
-			"recovered": "3",
-			"deaths": "1",
-			"active": "8",
+			"state": "Ladakh",
+			"confirmed": "10",
+			"recovered": "0",
+			"deaths": "0",
+			"active": "10",
 			"lastupdatedtime": "",
 			"confirmeddeltayesterday": "",
 			"deceaseddelta": "",
