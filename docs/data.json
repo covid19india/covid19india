@@ -2,12 +2,12 @@
 	"statewise": [
 		{
 			"state": "Total",
-			"confirmed": "252",
+			"confirmed": "255",
 			"recovered": "23",
 			"deaths": "4",
-			"active": "225",
+			"active": "228",
 			"lastupdatedtime": "March 20, 2020 at 8:30 pm",
-			"confirmeddeltayesterday": "53",
+			"confirmeddeltayesterday": "56",
 			"deceaseddelta": "0",
 			"recovereddelta": "3",
 			"statesdelta": "2"
@@ -86,10 +86,10 @@
 		},
 		{
 			"state": "Delhi",
-			"confirmed": "17",
+			"confirmed": "20",
 			"recovered": "5",
 			"deaths": "1",
-			"active": "11",
+			"active": "14",
 			"lastupdatedtime": "",
 			"confirmeddeltayesterday": "",
 			"deceaseddelta": "",
@@ -466,7 +466,7 @@
 			"totalrecovered": "0",
 			"dailydeceased": "0",
 			"totaldeceased": "0",
-			"confirmeddeltayesterday": "53",
+			"confirmeddeltayesterday": "56",
 			"recovereddelta": "3",
 			"deceaseddelta": "0"
 		},
@@ -1074,7 +1074,7 @@
 	"key_values": [
 		{
 			"lastupdatedtime": "March 20, 2020 at 8:30 pm",
-			"confirmeddelta": "53",
+			"confirmeddelta": "56",
 			"recovereddelta": "3",
 			"deceaseddelta": "0"
 		}
