@@ -2,12 +2,12 @@
 	"statewise": [
 		{
 			"state": "Total",
-			"confirmed": "227",
+			"confirmed": "231",
 			"recovered": "23",
 			"deaths": "4",
-			"active": "200",
+			"active": "204",
 			"lastupdatedtime": "March 20, 2020 at 4:00 pm",
-			"confirmeddeltayesterday": "28",
+			"confirmeddeltayesterday": "32",
 			"deceaseddelta": "0",
 			"recovereddelta": "3",
 			"statesdelta": "0"
@@ -242,10 +242,10 @@
 		},
 		{
 			"state": "Chandigarh",
-			"confirmed": "1",
+			"confirmed": "5",
 			"recovered": "0",
 			"deaths": "0",
-			"active": "1",
+			"active": "5",
 			"lastupdatedtime": "",
 			"confirmeddeltayesterday": "",
 			"deceaseddelta": "",
@@ -466,7 +466,7 @@
 			"totalrecovered": "0",
 			"dailydeceased": "0",
 			"totaldeceased": "0",
-			"confirmeddeltayesterday": "28",
+			"confirmeddeltayesterday": "32",
 			"recovereddelta": "3",
 			"deceaseddelta": "0"
 		},
