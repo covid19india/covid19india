@@ -2,12 +2,12 @@
 	"statewise": [
 		{
 			"state": "Total",
-			"confirmed": "255",
+			"confirmed": "256",
 			"recovered": "23",
 			"deaths": "4",
-			"active": "228",
+			"active": "229",
 			"lastupdatedtime": "March 20, 2020 at 8:30 pm",
-			"confirmeddeltayesterday": "56",
+			"confirmeddeltayesterday": "57",
 			"deceaseddelta": "0",
 			"recovereddelta": "3",
 			"statesdelta": "2"
@@ -74,10 +74,10 @@
 		},
 		{
 			"state": "Haryana",
-			"confirmed": "18",
+			"confirmed": "19",
 			"recovered": "0",
 			"deaths": "0",
-			"active": "18",
+			"active": "19",
 			"lastupdatedtime": "",
 			"confirmeddeltayesterday": "",
 			"deceaseddelta": "",
@@ -466,7 +466,7 @@
 			"totalrecovered": "0",
 			"dailydeceased": "0",
 			"totaldeceased": "0",
-			"confirmeddeltayesterday": "56",
+			"confirmeddeltayesterday": "57",
 			"recovereddelta": "3",
 			"deceaseddelta": "0"
 		},
@@ -1074,7 +1074,7 @@
 	"key_values": [
 		{
 			"lastupdatedtime": "March 20, 2020 at 8:30 pm",
-			"confirmeddelta": "56",
+			"confirmeddelta": "57",
 			"recovereddelta": "3",
 			"deceaseddelta": "0"
 		}
