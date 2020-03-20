@@ -2,12 +2,12 @@
 	"statewise": [
 		{
 			"state": "Total",
-			"confirmed": "231",
+			"confirmed": "236",
 			"recovered": "23",
 			"deaths": "4",
-			"active": "204",
+			"active": "209",
 			"lastupdatedtime": "March 20, 2020 at 6:04 pm",
-			"confirmeddeltayesterday": "32",
+			"confirmeddeltayesterday": "37",
 			"deceaseddelta": "0",
 			"recovereddelta": "3",
 			"statesdelta": "0"
@@ -26,10 +26,10 @@
 		},
 		{
 			"state": "Kerala",
-			"confirmed": "28",
+			"confirmed": "33",
 			"recovered": "3",
 			"deaths": "0",
-			"active": "25",
+			"active": "30",
 			"lastupdatedtime": "",
 			"confirmeddeltayesterday": "",
 			"deceaseddelta": "",
@@ -466,7 +466,7 @@
 			"totalrecovered": "0",
 			"dailydeceased": "0",
 			"totaldeceased": "0",
-			"confirmeddeltayesterday": "32",
+			"confirmeddeltayesterday": "37",
 			"recovereddelta": "3",
 			"deceaseddelta": "0"
 		},
