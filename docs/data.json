@@ -10,7 +10,7 @@
 			"confirmeddeltayesterday": "57",
 			"deceaseddelta": "0",
 			"recovereddelta": "3",
-			"statesdelta": "0"
+			"statesdelta": "1"
 		},
 		{
 			"state": "Maharashtra",
@@ -61,6 +61,18 @@
 			"statesdelta": ""
 		},
 		{
+			"state": "Telangana",
+			"confirmed": "19",
+			"recovered": "1",
+			"deaths": "0",
+			"active": "18",
+			"lastupdatedtime": "",
+			"confirmeddeltayesterday": "",
+			"deceaseddelta": "",
+			"recovereddelta": "",
+			"statesdelta": ""
+		},
+		{
 			"state": "Haryana",
 			"confirmed": "18",
 			"recovered": "0",
@@ -78,18 +90,6 @@
 			"recovered": "5",
 			"deaths": "1",
 			"active": "11",
-			"lastupdatedtime": "",
-			"confirmeddeltayesterday": "",
-			"deceaseddelta": "",
-			"recovereddelta": "",
-			"statesdelta": ""
-		},
-		{
-			"state": "Telangana",
-			"confirmed": "19",
-			"recovered": "1",
-			"deaths": "0",
-			"active": "18",
 			"lastupdatedtime": "",
 			"confirmeddeltayesterday": "",
 			"deceaseddelta": "",
@@ -1071,7 +1071,7 @@
 			"deceaseddelta": ""
 		}
 	],
-	"key_valyes": [
+	"key_values": [
 		{
 			"lastupdatedtime": "March 20, 2020 at 8:30 pm",
 			"confirmeddelta": "57",
