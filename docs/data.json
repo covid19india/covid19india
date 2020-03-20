@@ -49,6 +49,18 @@
 			"statesdelta": ""
 		},
 		{
+			"state": "Rajasthan",
+			"confirmed": "21",
+			"recovered": "3",
+			"deaths": "0",
+			"active": "18",
+			"lastupdatedtime": "",
+			"confirmeddeltayesterday": "",
+			"deceaseddelta": "",
+			"recovereddelta": "",
+			"statesdelta": ""
+		},
+		{
 			"state": "Haryana",
 			"confirmed": "18",
 			"recovered": "0",
@@ -97,18 +109,6 @@
 			"statesdelta": ""
 		},
 		{
-			"state": "Rajasthan",
-			"confirmed": "21",
-			"recovered": "3",
-			"deaths": "0",
-			"active": "18",
-			"lastupdatedtime": "",
-			"confirmeddeltayesterday": "",
-			"deceaseddelta": "",
-			"recovereddelta": "",
-			"statesdelta": ""
-		},
-		{
 			"state": "Ladakh",
 			"confirmed": "10",
 			"recovered": "0",
@@ -126,6 +126,18 @@
 			"recovered": "0",
 			"deaths": "0",
 			"active": "7",
+			"lastupdatedtime": "",
+			"confirmeddeltayesterday": "",
+			"deceaseddelta": "",
+			"recovereddelta": "",
+			"statesdelta": ""
+		},
+		{
+			"state": "Chandigarh",
+			"confirmed": "5",
+			"recovered": "0",
+			"deaths": "0",
+			"active": "5",
 			"lastupdatedtime": "",
 			"confirmeddeltayesterday": "",
 			"deceaseddelta": "",
@@ -234,18 +246,6 @@
 			"recovered": "0",
 			"deaths": "0",
 			"active": "1",
-			"lastupdatedtime": "",
-			"confirmeddeltayesterday": "",
-			"deceaseddelta": "",
-			"recovereddelta": "",
-			"statesdelta": ""
-		},
-		{
-			"state": "Chandigarh",
-			"confirmed": "5",
-			"recovered": "0",
-			"deaths": "0",
-			"active": "5",
 			"lastupdatedtime": "",
 			"confirmeddeltayesterday": "",
 			"deceaseddelta": "",
