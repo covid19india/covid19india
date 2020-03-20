@@ -7,10 +7,10 @@
 			"deaths": "4",
 			"active": "229",
 			"lastupdatedtime": "March 20, 2020 at 8:30 pm",
-			"confirmeddeltayesterday": "57",
+			"confirmeddeltayesterday": "0",
 			"deceaseddelta": "0",
-			"recovereddelta": "3",
-			"statesdelta": "2"
+			"recovereddelta": "0",
+			"statesdelta": "0"
 		},
 		{
 			"state": "Maharashtra",
@@ -466,8 +466,8 @@
 			"totalrecovered": "0",
 			"dailydeceased": "0",
 			"totaldeceased": "0",
-			"confirmeddeltayesterday": "57",
-			"recovereddelta": "3",
+			"confirmeddeltayesterday": "0",
+			"recovereddelta": "0",
 			"deceaseddelta": "0"
 		},
 		{
@@ -1060,6 +1060,18 @@
 		},
 		{
 			"date": "20 March ",
+			"dailyconfirmed": "57",
+			"totalconfirmed": "256",
+			"dailyrecovered": "3",
+			"totalrecovered": "23",
+			"dailydeceased": "0",
+			"totaldeceased": "4",
+			"confirmeddeltayesterday": "",
+			"recovereddelta": "",
+			"deceaseddelta": ""
+		},
+		{
+			"date": "21 March ",
 			"dailyconfirmed": "",
 			"totalconfirmed": "",
 			"dailyrecovered": "",
@@ -1074,8 +1086,8 @@
 	"key_values": [
 		{
 			"lastupdatedtime": "March 20, 2020 at 8:30 pm",
-			"confirmeddelta": "57",
-			"recovereddelta": "3",
+			"confirmeddelta": "0",
+			"recovereddelta": "0",
 			"deceaseddelta": "0"
 		}
 	]
