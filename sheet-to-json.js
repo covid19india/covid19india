@@ -13,7 +13,7 @@ const filename = '/data.json'
 const tabs = {
   statewise: SHEET_STATEWISE_TAB,
   cases_time_series: SHEET_CASES_TIME_SERIES_TAB,
-  key_valyes: SHEET_KEY_VALUES_TAB,
+  key_values: SHEET_KEY_VALUES_TAB,
 };
 
 async function fetchData() {
