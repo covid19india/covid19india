@@ -20,7 +20,7 @@ node sheet-to-json.js
 
 git add docs/data.json
 set +e  # Grep succeeds with nonzero exit codes to show results.
-git status docs/ | grep 'new file\|modified'
+git status docs/data.json | grep 'new file\|modified'
 if [ $? -eq 0 ]
 then
     set -e

@@ -5,6 +5,7 @@ const drive = require("drive-db");
 const SHEET = "1nzXUdaIWC84QipdVGUKTiCSc5xntBbpMpzLm6Si33zk";
 const SHEET_STATEWISE_TAB = "ovd0hzm"
 const SHEET_CASES_TIME_SERIES_TAB = "o6emnqt"
+const SHEET_KEY_VALUES_TAB = "owlnkho"
 
 const dir='./docs'
 const filename = '/data.json'
@@ -12,6 +13,7 @@ const filename = '/data.json'
 const tabs = {
   statewise: SHEET_STATEWISE_TAB,
   cases_time_series: SHEET_CASES_TIME_SERIES_TAB,
+  key_valyes: SHEET_KEY_VALUES_TAB,
 };
 
 async function fetchData() {
