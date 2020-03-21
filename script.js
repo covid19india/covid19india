@@ -8,7 +8,7 @@ var deaths_delta = 0;
 var recovered_delta = 0;
 var states_delta = 0;
 let total = {};
-
+var key_values = 0;
 var numStatesInfected = 0;
 var stateWiseTableData;
 var sort_field = 0;
@@ -40,7 +40,7 @@ var table_columns = [
 $.getJSON("https://api.covid19india.org/data.json",
 function(result) {
     stateWiseTableData = result.statewise;
-    const key_values = result.key_values[0];
+    key_values = result.key_values[0];
     stateWiseTableData.forEach((stateData) => {
         if(stateData.state === "Total") {
             total = stateData;
@@ -66,9 +66,33 @@ function(result) {
     if(key_values.recovereddelta)$("div#recovered_delta").html("( +"+key_values.recovereddelta+")");
     if(key_values.statesdelta)$("div#states_delta").html("( +"+key_values.statesdelta+")");
 
+    constructTweetButton();
+
     initMapStuff();
 
 });
+
+
+function constructTweetButton() {
+    let current_date = new Date().toLocaleString('en-IN');
+    let active_delta = key_values.confirmeddelta - key_values.recovereddelta
+    let active_delta_status = active_delta >= 0? "increased" : "decreased";
+    const tweet_content = `COVID-19 India : 📊 as of ${current_date} IST
+Total Confirmed : ${total.confirmed}
+Total Recovered : ${total.recovered}
+Total Deceased. : ${total.deaths}
+
+Number of active cases ${active_delta_status} by ${Math.abs(active_delta)} today
+
+Follow @covid19indiaorg
+
+#COVI19India #SocialDistancing
+More @`
+
+    jQuery("#twitter_share").attr("data-text", tweet_content);
+    jQuery("#twitter_share").addClass("twitter-share-button");
+    twttr.widgets.load();
+}
 
 function is_touch_device() {
     try {
