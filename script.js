@@ -15,62 +15,63 @@ var sort_field = 0;
 var sort_order;
 
 var table_columns = [
-    {
-        key: "state",
-        display_name: "State"
-    },
-    {
-        key: "confirmed",
-        display_name: "Confirmed"
-    },
-    {
-        key: "recovered",
-        display_name: "Recovered"
-    },
-    {
-        key: "deaths",
-        display_name: "Deaths"
-    },
-    {
-        key: "active",
-        display_name: "Active"
-    }
+{
+    key: "state",
+    display_name: "State"
+},
+{
+    key: "confirmed",
+    display_name: "Confirmed"
+},
+{
+    key: "recovered",
+    display_name: "Recovered"
+},
+{
+    key: "deaths",
+    display_name: "Deaths"
+},
+{
+    key: "active",
+    display_name: "Active"
+}
 ];
 
 $.getJSON("https://api.covid19india.org/data.json",
-function(result) {
-    stateWiseTableData = result.statewise;
-    key_values = result.key_values[0];
-    stateWiseTableData.forEach((stateData) => {
-        if(stateData.state === "Total") {
-            total = stateData;
-        } else {
-            if(parseInt(stateData.confirmed) > 0) {
-                numStatesInfected++;
+    function(result) {
+        stateWiseTableData = result.statewise;
+        key_values = result.key_values[0];
+        stateWiseTableData.forEach((stateData) => {
+            if(stateData.state === "Total") {
+                total = stateData;
+            } else {
+                if(parseInt(stateData.confirmed) > 0) {
+                    numStatesInfected++;
+                }
+                maxConfirmed = stateData.confirmed > maxConfirmed ? stateData.confirmed : maxConfirmed;
+                statewise[stateData.state] = stateData;
             }
-            maxConfirmed = stateData.confirmed > maxConfirmed ? stateData.confirmed : maxConfirmed;
-            statewise[stateData.state] = stateData;
-        }
+        });
+
+        tablehtml = constructTable(stateWiseTableData);
+        
+        $("div#states-value").html(numStatesInfected);
+        $("div#confvalue").html(total.confirmed);
+        $("div#deathsvalue").html(total.deaths);
+        $("div#recoveredvalue").html(total.recovered);
+        $("strong#last-updated").html(key_values.lastupdatedtime);
+
+        if(key_values.confirmeddelta)$("div#confirmed_delta").html("( +"+key_values.confirmeddelta+")");
+        if(key_values.deceaseddelta) $("div#deaths_delta").html("( +"+key_values.deceaseddelta+")");
+        if(key_values.recovereddelta)$("div#recovered_delta").html("( +"+key_values.recovereddelta+")");
+        if(key_values.statesdelta)$("div#states_delta").html("( +"+key_values.statesdelta+")");
+
+        
+
+        initMapStuff();
+        constructTweetButton();
+
     });
-
-    tablehtml = constructTable(stateWiseTableData);
-    
-    $("div#states-value").html(numStatesInfected);
-    $("div#confvalue").html(total.confirmed);
-    $("div#deathsvalue").html(total.deaths);
-    $("div#recoveredvalue").html(total.recovered);
-    $("strong#last-updated").html(key_values.lastupdatedtime);
-
-    if(key_values.confirmeddelta)$("div#confirmed_delta").html("( +"+key_values.confirmeddelta+")");
-    if(key_values.deceaseddelta) $("div#deaths_delta").html("( +"+key_values.deceaseddelta+")");
-    if(key_values.recovereddelta)$("div#recovered_delta").html("( +"+key_values.recovereddelta+")");
-    if(key_values.statesdelta)$("div#states_delta").html("( +"+key_values.statesdelta+")");
-
-    constructTweetButton();
-
-    initMapStuff();
-
-});
 
 
 function constructTweetButton() {
@@ -82,20 +83,24 @@ function constructTweetButton() {
     let active_delta = key_values.confirmeddelta - key_values.recovereddelta
     let active_delta_status = active_delta >= 0? "increased" : "decreased";
     const tweet_content = `COVID-19 India : 📊 as of ${current_date} IST
-Total Confirmed : ${total.confirmed}
-Total Recovered : ${total.recovered}
-Total Deceased. : ${total.deaths}
+    Total Confirmed : ${total.confirmed}
+    Total Recovered : ${total.recovered}
+    Total Deceased. : ${total.deaths}
 
-Number of cases reported today: ${Math.abs(key_values.confirmeddelta)}
+    Number of cases reported today: ${Math.abs(key_values.confirmeddelta)}
 
-Follow @covid19indiaorg
+    Follow @covid19indiaorg
 
-#COVID19India #SocialDistancing
-More @`
+    #COVID19India #SocialDistancing
+    More @`
 
     jQuery("#twitter_share").attr("data-text", tweet_content);
     jQuery("#twitter_share").addClass("twitter-share-button");
-    twttr.widgets.load();
+    try{
+        twttr.widgets.load();
+    } catch(e){
+        console.log(e);
+    }
 }
 
 function is_touch_device() {
@@ -116,14 +121,14 @@ function initMapStuff(){
         map.dragging.disable();
         map.tap.disable();
     }
-``
+    ``
     L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1Ijoic2hhZmVlcS1ldCIsImEiOiJjazgwZ2Jta20wZ2lxM2tsbjBmbnpsNGQyIn0.JyWxwnlx0oDopQ8JWM8YZA', {
-    maxZoom: 6,
-    minZoom: 4,
-    id: 'mapbox/light-v9',
-    tileSize: 512,
-    zoomOffset: -1
-}).addTo(map);
+        maxZoom: 6,
+        minZoom: 4,
+        id: 'mapbox/light-v9',
+        tileSize: 512,
+        zoomOffset: -1
+    }).addTo(map);
 
 
 // control that shows state info on hover
