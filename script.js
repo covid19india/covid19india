@@ -90,7 +90,7 @@ Number of cases reported today: ${Math.abs(key_values.confirmeddelta)}
 
 Follow @covid19indiaorg
 
-#COVI19India #SocialDistancing
+#COVID19India #SocialDistancing
 More @`
 
     jQuery("#twitter_share").attr("data-text", tweet_content);
