@@ -7,55 +7,64 @@ var confirmed_delta = 0;
 var deaths_delta = 0;
 var recovered_delta = 0;
 var states_delta = 0;
+let total = {};
 
 var numStatesInfected = 0;
-var all_data;
-
+var stateWiseTableData;
 var sort_field = 0;
 var sort_order;
 
-// make sure to use Prod before submitting
-
-// var sheet_id = "ob1elpb"; // Test
-var sheet_id = "ovd0hzm"; // Prod
-
-$.getJSON("https://api.covid19india.org/state_wise_raw.json",
-function(result) {
-    // console.log(result)
-    entries = result["feed"]["entry"]
-    entries.forEach(function(item) {
-        if (all_data[(item["gs$cell"]["row"] - 1)] == null) {
-            all_data[(item["gs$cell"]["row"] - 1)] = [];
-        }
-        all_data[(item["gs$cell"]["row"] - 1)][(item["gs$cell"]["col"] - 1)] = (item["gs$cell"]["$t"]);
-    });
-    maxConfirmed = all_data[2][1];
-    lastUpdated = getLocalTime(all_data[1][5]);
-    confirmed_delta = all_data[1][6];
-    deaths_delta = all_data[1][7];
-    recovered_delta = all_data[1][8];
-    states_delta = all_data[1][9];
-    for(var i = 0; i<all_data.length;i++){
-        all_data[i].splice(5); // Keep only 5 columns. State, Confirmed, Recovered, Deaths, Active
+var table_columns = [
+    {
+        key: "state",
+        display_name: "State"
+    },
+    {
+        key: "confirmed",
+        display_name: "Confirmed"
+    },
+    {
+        key: "recovered",
+        display_name: "Recovered"
+    },
+    {
+        key: "deaths",
+        display_name: "Deaths"
+    },
+    {
+        key: "active",
+        display_name: "Active"
     }
-    all_data.forEach(function(data){
-        statewise[data[0]] = data;
+];
+
+$.getJSON("https://api.covid19india.org/data.json",
+function(result) {
+    stateWiseTableData = result.statewise;
+    const key_values = result.key_values[0];
+    stateWiseTableData.forEach((stateData) => {
+        if(stateData.state === "Total") {
+            total = stateData;
+        } else {
+            if(parseInt(stateData.confirmed) > 0) {
+                numStatesInfected++;
+            }
+            maxConfirmed = stateData.confirmed > maxConfirmed ? stateData.confirmed : maxConfirmed;
+            statewise[stateData.state] = stateData;
+        }
     });
 
-    tablehtml = constructTable(all_data);
-
-    // console.log(numStatesInfected);
+    tablehtml = constructTable(stateWiseTableData);
+    
     $("div#states-value").html(numStatesInfected);
-    $("div#confvalue").html(all_data[1][1]);
-    $("div#deathsvalue").html(all_data[1][3]);
-    $("div#recoveredvalue").html(all_data[1][2]);
-    $("strong#last-updated").html(lastUpdated);
+    $("div#confvalue").html(total.confirmed);
+    $("div#deathsvalue").html(total.deaths);
+    $("div#recoveredvalue").html(total.recovered);
+    $("strong#last-updated").html(key_values.lastupdatedtime);
 
-    if(confirmed_delta)$("div#confirmed_delta").html("( +"+confirmed_delta+")");
-    if(deaths_delta) $("div#deaths_delta").html("( +"+deaths_delta+")");
-    if(recovered_delta)$("div#recovered_delta").html("( +"+recovered_delta+")");
-    if(states_delta)$("div#states_delta").html("( +"+states_delta+")");
-
+    if(key_values.confirmeddelta)$("div#confirmed_delta").html("( +"+key_values.confirmeddelta+")");
+    if(key_values.deceaseddelta) $("div#deaths_delta").html("( +"+key_values.deceaseddelta+")");
+    if(key_values.recovereddelta)$("div#recovered_delta").html("( +"+key_values.recovereddelta+")");
+    if(key_values.statesdelta)$("div#states_delta").html("( +"+key_values.statesdelta+")");
 
     initMapStuff();
 
@@ -100,13 +109,11 @@ info.onAdd = function (map) {
 
 info.update = function (props) {
     if(props){
-        // console.log(props);
-        // this._div.innerHTML = '<h4>Confirmed cases</h4><b>' + props["NAME_1"] + ": "+statewise[props["NAME_1"]][1]+"</b>";
         this._div.innerHTML = '<h4>'+props["NAME_1"]+'</h4>'+
-        '<pre>Confirmed: '+statewise[props["NAME_1"]][1]+
-        '<br>Recovered: '+statewise[props["NAME_1"]][2]+
-        '<br>Deaths   : '+statewise[props["NAME_1"]][3]+
-        '<br>Active   : '+statewise[props["NAME_1"]][4]+"</pre>";
+        '<pre>Confirmed: '+statewise[props["NAME_1"]].confirmed+
+        '<br>Recovered: '+statewise[props["NAME_1"]].recovered+
+        '<br>Deaths   : '+statewise[props["NAME_1"]].deaths+
+        '<br>Active   : '+statewise[props["NAME_1"]].active+"</pre>";
     }
 
 };
@@ -114,21 +121,16 @@ info.update = function (props) {
 info.addTo(map);
 
 function style(feature) {
-    // console.log(feature.properties["NAME_1"]);
-    // console.log(statewise[feature.properties["NAME_1"]]);
     var n = 0
     if(statewise[feature.properties["NAME_1"]]){
-        // console.log(statewise[feature.properties["NAME_1"]][1]);
-        n = statewise[feature.properties["NAME_1"]][1];
+        n = statewise[feature.properties["NAME_1"]].confirmed;
     }
 
     return {
         weight: 1,
         opacity: 1,
         color: "#bfbfbf",
-        // dashArray: '3',
         fillOpacity: (n>0)*0.05 + (n/maxConfirmed)*0.9,
-        // fillColor: "#000000"
         fillColor: "red"
     };
 }
@@ -143,7 +145,6 @@ function highlightFeature(e) {
         weight: 1,
         color: '#000000',
         dashArray: '',
-        // fillOpacity: 0.7
     });
 
     if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
@@ -189,53 +190,42 @@ function getLocalTime(timestamp){
     }
 }
 
-
-function constructTable(all_data) {
+function constructTable(stateWiseTableData) {
     var tablehtml = "<thead>";
-    for (var i = 0; i < all_data.length; i++) {
-        if (i == 0) {
-            tablehtml += "<tr>";
-            all_data[i].forEach(function(data, i) {
-                tablehtml += "<th><a href='' col_id='" + i + "' onclick='sort(this,event)'>" + data + "</a></th>";
-            });
-            tablehtml += "</tr></thead><tbody>";
-        } else {
-            if (i == 1) {
-                continue;
-            }
-            tempdata = Array.from(all_data[i]);
 
-            tempdata.splice(0, 1);
-            allzero = true;
-            tempdata.forEach(function(data) {
-                if (data != 0) {
-                    allzero = false;
-                }
-            });
-            if (!allzero) {
-                numStatesInfected++;
-                tablehtml += "<tr>";
-                all_data[i].forEach(function(data) {
-                    tablehtml += "<td>" + data + "</td>";
-                });
-                tablehtml += "</tr>";
-            }
+    /* Construct Table Header */
+    tablehtml += "<tr>";
+    table_columns.forEach(function(column, i) {
+        tablehtml += "<th><a href='' col_id='" + i + "' onclick='sort(this,event)'>" + column.display_name + "</a></th>";
+    });
+    tablehtml += "</tr></thead><tbody>";
+
+    /* Construct Table Body */
+    stateWiseTableData.forEach((stateData, index) => {
+        if(stateData.state === "Total"){
+            return;
         }
-    }
-    tablehtml += '<tr class="totals">';
-    all_data[1].forEach(function(data) {
-        tablehtml += "<td>" + data + "</td>";
-    });
-    tablehtml += "</tr>";
 
-    tablehtml += "</tbody>";
-    all_data.forEach(function(item) {
-        tablehtml += item[0];
+        tablehtml += "<tr>";
+        table_columns.forEach(column => {
+            if(parseInt(stateData.confirmed) > 0) {
+                tablehtml += "<td>" + stateData[column.key] + "</td>";
+            }
+        })
+        tablehtml += "</tr>";
+
     });
+
+    /* Adding Total Row at end */
+    tablehtml += '<tr class="totals">';
+    table_columns.forEach(column => {
+        tablehtml += "<td>" + total[column.key] + "</td>";
+    });
+    tablehtml += "</tr></tbody";
+
     $("table#prefectures-table").html(tablehtml);
     return tablehtml;
 }
-
 
 function sort(column, event) {
     event.stopPropagation();
@@ -243,41 +233,37 @@ function sort(column, event) {
 
     const col_id = $(column).attr("col_id");
 
-    var total_ele = all_data.splice(0, 2);
-
+    var total_ele = stateWiseTableData.splice(0, 1);
+    
     sort_order = col_id == sort_field? sort_order : undefined;
 
     if(!sort_order) {
         sort_order = col_id == 0? "A" : "D"
     }
 
-    all_data.sort((a, b) => {
-        if(a == "Total") {
-            return -1;
-        }
+    const columnKey = table_columns[col_id].key;
 
-        if(b == "Total") {
-            return 0;
-        }
-
-        if(col_id != 0) {
-            a[col_id] = parseInt(a[col_id]);
-            b[col_id] = parseInt(b[col_id]);
+    stateWiseTableData.sort((StateData1, StateData2) => {
+        let value1 = StateData1[columnKey];
+        let value2 = StateData2[columnKey];
+        
+        if(columnKey != "state") {
+            value1 = parseInt(value1);
+            value2 = parseInt(value2);
         }
 
         if(sort_order == "D"){
-            return a[col_id] > b[col_id]? -1 : 1;
+            return value1 > value2? -1 : 1;
         } else {
-            return a[col_id] > b[col_id]? 1 : -1;
+            return value1 > value2? 1 : -1;
         }
     })
 
-    all_data.unshift(total_ele[1]);
-    all_data.unshift(total_ele[0]);
+    stateWiseTableData.unshift(total_ele[0]);
 
     sort_field = col_id;
 
     sort_order = sort_order == "A"? "D" : "A";
 
-    constructTable(all_data);
+    constructTable(stateWiseTableData);
 }
