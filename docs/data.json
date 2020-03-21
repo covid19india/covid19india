@@ -2,23 +2,23 @@
 	"statewise": [
 		{
 			"state": "Total",
-			"confirmed": "256",
+			"confirmed": "278",
 			"recovered": "23",
 			"deaths": "4",
-			"active": "229",
-			"lastupdatedtime": "March 20, 2020 at 8:30 pm",
-			"confirmeddeltayesterday": "57",
+			"active": "251",
+			"lastupdatedtime": "March 21, 2020 at 10:24 am",
+			"confirmeddeltayesterday": "20",
 			"deceaseddelta": "0",
-			"recovereddelta": "3",
-			"statesdelta": "2"
+			"recovereddelta": "0",
+			"statesdelta": "0"
 		},
 		{
 			"state": "Maharashtra",
-			"confirmed": "52",
+			"confirmed": "63",
 			"recovered": "0",
 			"deaths": "1",
-			"active": "51",
-			"lastupdatedtime": "",
+			"active": "62",
+			"lastupdatedtime": "257",
 			"confirmeddeltayesterday": "",
 			"deceaseddelta": "",
 			"recovereddelta": "",
@@ -50,9 +50,21 @@
 		},
 		{
 			"state": "Rajasthan",
-			"confirmed": "17",
+			"confirmed": "23",
 			"recovered": "3",
 			"deaths": "0",
+			"active": "20",
+			"lastupdatedtime": "",
+			"confirmeddeltayesterday": "",
+			"deceaseddelta": "",
+			"recovereddelta": "",
+			"statesdelta": ""
+		},
+		{
+			"state": "Delhi",
+			"confirmed": "20",
+			"recovered": "5",
+			"deaths": "1",
 			"active": "14",
 			"lastupdatedtime": "",
 			"confirmeddeltayesterday": "",
@@ -85,18 +97,6 @@
 			"statesdelta": ""
 		},
 		{
-			"state": "Delhi",
-			"confirmed": "20",
-			"recovered": "5",
-			"deaths": "1",
-			"active": "14",
-			"lastupdatedtime": "",
-			"confirmeddeltayesterday": "",
-			"deceaseddelta": "",
-			"recovereddelta": "",
-			"statesdelta": ""
-		},
-		{
 			"state": "Karnataka",
 			"confirmed": "15",
 			"recovered": "1",
@@ -122,10 +122,22 @@
 		},
 		{
 			"state": "Gujarat",
-			"confirmed": "7",
+			"confirmed": "8",
 			"recovered": "0",
 			"deaths": "0",
-			"active": "7",
+			"active": "8",
+			"lastupdatedtime": "",
+			"confirmeddeltayesterday": "",
+			"deceaseddelta": "",
+			"recovereddelta": "",
+			"statesdelta": ""
+		},
+		{
+			"state": "Punjab",
+			"confirmed": "6",
+			"recovered": "0",
+			"deaths": "1",
+			"active": "5",
 			"lastupdatedtime": "",
 			"confirmeddeltayesterday": "",
 			"deceaseddelta": "",
@@ -205,11 +217,11 @@
 			"statesdelta": ""
 		},
 		{
-			"state": "Punjab",
+			"state": "West Bengal",
 			"confirmed": "3",
 			"recovered": "0",
-			"deaths": "1",
-			"active": "2",
+			"deaths": "0",
+			"active": "3",
 			"lastupdatedtime": "",
 			"confirmeddeltayesterday": "",
 			"deceaseddelta": "",
@@ -218,18 +230,6 @@
 		},
 		{
 			"state": "Odisha",
-			"confirmed": "2",
-			"recovered": "0",
-			"deaths": "0",
-			"active": "2",
-			"lastupdatedtime": "",
-			"confirmeddeltayesterday": "",
-			"deceaseddelta": "",
-			"recovereddelta": "",
-			"statesdelta": ""
-		},
-		{
-			"state": "West Bengal",
 			"confirmed": "2",
 			"recovered": "0",
 			"deaths": "0",
@@ -466,8 +466,8 @@
 			"totalrecovered": "0",
 			"dailydeceased": "0",
 			"totaldeceased": "0",
-			"confirmeddeltayesterday": "57",
-			"recovereddelta": "3",
+			"confirmeddeltayesterday": "20",
+			"recovereddelta": "0",
 			"deceaseddelta": "0"
 		},
 		{
@@ -1060,6 +1060,18 @@
 		},
 		{
 			"date": "20 March ",
+			"dailyconfirmed": "59",
+			"totalconfirmed": "258",
+			"dailyrecovered": "3",
+			"totalrecovered": "23",
+			"dailydeceased": "0",
+			"totaldeceased": "4",
+			"confirmeddeltayesterday": "",
+			"recovereddelta": "",
+			"deceaseddelta": ""
+		},
+		{
+			"date": "21 March ",
 			"dailyconfirmed": "",
 			"totalconfirmed": "",
 			"dailyrecovered": "",
@@ -1073,9 +1085,9 @@
 	],
 	"key_values": [
 		{
-			"lastupdatedtime": "March 20, 2020 at 8:30 pm",
-			"confirmeddelta": "57",
-			"recovereddelta": "3",
+			"lastupdatedtime": "March 21, 2020 at 10:24 am",
+			"confirmeddelta": "20",
+			"recovereddelta": "0",
 			"deceaseddelta": "0"
 		}
 	]

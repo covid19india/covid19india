@@ -19,9 +19,16 @@ const tabs = {
 async function fetchData() {
   const data = await Promise.all(
     Object.keys(tabs).map(async tab => {
-      return {
-        [tab]: await drive({ sheet: SHEET, tab: tabs[tab] })
-      };
+
+      try { // handle the errors worksheet not availabe, no values where found on worksheets
+        return {
+          [tab]: await drive({ sheet: SHEET, tab: tabs[tab] })
+        };
+      } catch (err) {
+        if(err){
+          console.log("Worksheet Error: Look like worksheet "+ tab +" is empty or no data are not loaded yet in the fields");
+        }
+      }
     })
   );
 
