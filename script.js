@@ -19,7 +19,7 @@ var sort_order;
 // var sheet_id = "ob1elpb"; // Test
 var sheet_id = "ovd0hzm"; // Prod
 
-$.getJSON("https://spreadsheets.google.com/feeds/cells/1nzXUdaIWC84QipdVGUKTiCSc5xntBbpMpzLm6Si33zk/"+sheet_id+"/public/values?alt=json",
+$.getJSON("https://www.covid19india.org/temp.json",
 function(result) {
     // console.log(result)
     entries = result["feed"]["entry"]
@@ -43,7 +43,7 @@ function(result) {
     });
 
     tablehtml = constructTable(all_data);
-    
+
     // console.log(numStatesInfected);
     $("div#states-value").html(numStatesInfected);
     $("div#confvalue").html(all_data[1][1]);
@@ -244,7 +244,7 @@ function sort(column, event) {
     const col_id = $(column).attr("col_id");
 
     var total_ele = all_data.splice(0, 2);
-    
+
     sort_order = col_id == sort_field? sort_order : undefined;
 
     if(!sort_order) {
