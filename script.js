@@ -19,7 +19,7 @@ var sort_order;
 // var sheet_id = "ob1elpb"; // Test
 var sheet_id = "ovd0hzm"; // Prod
 
-$.getJSON("https://www.covid19india.org/temp.json",
+$.getJSON("https://api.covid19india.org/state_wise_raw.json",
 function(result) {
     // console.log(result)
     entries = result["feed"]["entry"]
