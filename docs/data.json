@@ -2,12 +2,12 @@
 	"statewise": [
 		{
 			"state": "Total",
-			"confirmed": "256",
+			"confirmed": "257",
 			"recovered": "23",
 			"deaths": "4",
-			"active": "229",
-			"lastupdatedtime": "March 20, 2020 at 9:30 pm",
-			"confirmeddeltayesterday": "0",
+			"active": "230",
+			"lastupdatedtime": "March 21, 2020 at 9:00 am",
+			"confirmeddeltayesterday": "1",
 			"deceaseddelta": "0",
 			"recovereddelta": "0",
 			"statesdelta": "0"
@@ -18,7 +18,7 @@
 			"recovered": "0",
 			"deaths": "1",
 			"active": "51",
-			"lastupdatedtime": "",
+			"lastupdatedtime": "257",
 			"confirmeddeltayesterday": "",
 			"deceaseddelta": "",
 			"recovereddelta": "",
@@ -230,10 +230,10 @@
 		},
 		{
 			"state": "West Bengal",
-			"confirmed": "2",
+			"confirmed": "3",
 			"recovered": "0",
 			"deaths": "0",
-			"active": "2",
+			"active": "3",
 			"lastupdatedtime": "",
 			"confirmeddeltayesterday": "",
 			"deceaseddelta": "",
@@ -466,7 +466,7 @@
 			"totalrecovered": "0",
 			"dailydeceased": "0",
 			"totaldeceased": "0",
-			"confirmeddeltayesterday": "0",
+			"confirmeddeltayesterday": "1",
 			"recovereddelta": "0",
 			"deceaseddelta": "0"
 		},
@@ -1085,8 +1085,8 @@
 	],
 	"key_values": [
 		{
-			"lastupdatedtime": "March 20, 2020 at 9:30 pm",
-			"confirmeddelta": "0",
+			"lastupdatedtime": "March 21, 2020 at 9:00 am",
+			"confirmeddelta": "1",
 			"recovereddelta": "0",
 			"deceaseddelta": "0"
 		}
