@@ -54,19 +54,19 @@ $.getJSON("https://api.covid19india.org/data.json",
         });
 
         tablehtml = constructTable(stateWiseTableData);
-        
+
         $("div#states-value").html(numStatesInfected);
         $("div#confvalue").html(total.confirmed);
         $("div#deathsvalue").html(total.deaths);
         $("div#recoveredvalue").html(total.recovered);
-        $("strong#last-updated").html(key_values.lastupdatedtime);
+        $("strong#last-updated").html(getLocalTime(key_values.lastupdatedtime));
 
         if(key_values.confirmeddelta)$("div#confirmed_delta").html("( +"+key_values.confirmeddelta+")");
         if(key_values.deceaseddelta) $("div#deaths_delta").html("( +"+key_values.deceaseddelta+")");
         if(key_values.recovereddelta)$("div#recovered_delta").html("( +"+key_values.recovereddelta+")");
         if(key_values.statesdelta)$("div#states_delta").html("( +"+key_values.statesdelta+")");
 
-        
+
 
         initMapStuff();
         constructTweetButton();
@@ -85,7 +85,7 @@ function constructTweetButton() {
     const tweet_content = `COVID-19 India : 📊 as of ${current_date} IST
     Total Confirmed : ${total.confirmed}
     Total Recovered : ${total.recovered}
-    Total Deceased. : ${total.deaths}
+    Total Deceased  : ${total.deaths}
 
     Number of cases reported today: ${Math.abs(key_values.confirmeddelta)}
 
@@ -217,6 +217,9 @@ function getLocalTime(timestamp){
         // Assuming that the timestamp at hand is in IST, and is of the format
         // "March 17, 2020 at 10:11 pm", though the linient parser can handle sane versions of dates
         let localTime = new Date(timestamp.replace('at ','') + ' GMT+530');
+        if (isNaN(localTime)){
+            return timestamp;
+        }
         return moment(+localTime).from();
     } catch(e){
         return timestamp;
