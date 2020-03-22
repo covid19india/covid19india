@@ -42,13 +42,20 @@ $.getJSON("https://api.covid19india.org/data.json",
         stateWiseTableData = result.statewise;
         key_values = result.key_values[0];
         stateWiseTableData.forEach((stateData) => {
+            // Parse fields as int (For #35)
+            stateData.active = parseInt(stateData.active)
+            stateData.confirmed = parseInt(stateData.confirmed)
+            stateData.deaths = parseInt(stateData.deaths)
+            stateData.recovered = parseInt(stateData.recovered)
+
             if(stateData.state === "Total") {
                 total = stateData;
             } else {
-                if(parseInt(stateData.confirmed) > 0) {
+                if(stateData.confirmed > 0) {
                     numStatesInfected++;
                 }
                 maxConfirmed = stateData.confirmed > maxConfirmed ? stateData.confirmed : maxConfirmed;
+                console.log(maxConfirmed)
                 statewise[stateData.state] = stateData;
             }
         });
@@ -270,7 +277,7 @@ function sort(column, event) {
     const col_id = $(column).attr("col_id");
 
     var total_ele = stateWiseTableData.splice(0, 1);
-    
+
     sort_order = col_id == sort_field? sort_order : undefined;
 
     if(!sort_order) {
@@ -282,7 +289,7 @@ function sort(column, event) {
     stateWiseTableData.sort((StateData1, StateData2) => {
         let value1 = StateData1[columnKey];
         let value2 = StateData2[columnKey];
-        
+
         if(columnKey != "state") {
             value1 = parseInt(value1);
             value2 = parseInt(value2);
