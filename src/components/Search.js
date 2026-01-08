@@ -43,6 +43,7 @@ function Search() {
   const [searchValue, setSearchValue] = useState('');
   const [expand, setExpand] = useState(false);
   const [results, setResults] = useState([]);
+  const [timeoutId, setTimeoutId] = useState([]);
   const searchInput = useRef(null);
   const {t} = useTranslation();
 
@@ -179,9 +180,10 @@ function Search() {
       target.classList.remove('disappear');
       target.textContent = placeholder + text[cursorPosition];
       if (cursorPosition < text.length - 1) {
-        setTimeout(function () {
+        const id = setTimeout(function () {
           fillPlaceholder(target, index, cursorPosition + 1, callback);
         }, 200);
+        setTimeoutId((prev) => [...prev, id]);
         return true;
       }
       callback();
@@ -193,10 +195,11 @@ function Search() {
     const placeholder = target.textContent;
     target.classList.add('disappear');
     if (placeholder.length > 0) {
-      setTimeout(function () {
+      const id = setTimeout(function () {
         target.textContent = '';
         clearPlaceholder(target, callback);
       }, 1000);
+      setTimeoutId((prev) => [...prev, id]);
       return true;
     }
     callback();
@@ -210,11 +213,12 @@ function Search() {
       }
 
       fillPlaceholder(target, index, 0, function () {
-        setTimeout(function () {
+        const id = setTimeout(function () {
           clearPlaceholder(target, function () {
             loopThroughSuggestions(target, (index + 1) % suggestions.length);
           });
         }, 2000);
+        setTimeoutId((prev) => [...prev, id]);
       });
     },
     [clearPlaceholder, expand, fillPlaceholder]
@@ -226,9 +230,12 @@ function Search() {
         document.getElementsByClassName('search-placeholder')[0];
 
       if (targetInput) {
+        targetInput.textContent = '';
+        clearAllTimeouts(timeoutId);
         loopThroughSuggestions(targetInput, 0);
       }
     }
+    // eslint-disable-next-line
   }, [expand, loopThroughSuggestions]);
 
   const trail = useMemo(() => {
@@ -367,6 +374,10 @@ function Search() {
     </div>
   );
 }
+
+const clearAllTimeouts = (timeouts) => {
+  timeouts.forEach((id) => clearTimeout(id));
+};
 
 const isEqual = () => {
   return true;
